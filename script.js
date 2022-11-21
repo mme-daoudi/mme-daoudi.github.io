@@ -93,8 +93,8 @@ function turn(squareId, player) {
 	if (gameWon) gameOver(gameWon)
 }
 
-function checkWin(board, player) {
-	let plays = board.reduce((a, e, i) =>
+function checkWin(table, player) {
+	let plays = table.reduce((a, e, i) =>
 		(e === player) ? a.concat(i) : a, []);
 	let gameWon = null;
 	for (let [index, win] of Combinaisons.entries()) {
