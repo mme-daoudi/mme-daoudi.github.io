@@ -72,7 +72,6 @@ function start() {
 		cells[i].style.removeProperty('background-color');
 		cells[i].addEventListener('click', turnClick, false);
 	}
-
 }
 
 const cells = document.querySelectorAll('.cell');
@@ -84,23 +83,23 @@ function turnClick(square) {
 		turn(square.target.id, huPlayer)
 		if (!checkWin(tableOrg, huPlayer) && !checkTie()) turn(bestSpot(), aiPlayer);
 	}
-} 
+}
 
 function turn(squareId, player) {
 	tableOrg[squareId] = player;
 	document.getElementById(squareId).innerText = player;
-	let gameWon = checkWin(tableOrg, player)
-	if (gameWon) gameOver(gameWon)
+	let gameWon = checkWin(tableOrg, player);
+	if (gameWon) gameOver(gameWon);
 }
 
 function checkWin(table, player) {
-	let plays = table.reduce((a, e, i) =>
-		(e === player) ? a.concat(i) : a, []);
+	let plays = table.reduce((a, e, i) => 
+	(e === player) ? a.concat(i) : a, []); // condition variable
 	let gameWon = null;
 	for (let [index, win] of Combinaisons.entries()) {
-		if (win.every(elem => plays.indexOf(elem) > -1)) {
-			gameWon = {index: index, player: player};
-			break;
+			if (win.every(elem => plays.indexOf(elem) > -1)) {
+				gameWon = {index: index, player: player}; //object 
+				break;
 		}
 	}
 	return gameWon;
@@ -114,7 +113,7 @@ function gameOver(gameWon) {
 	for (var i = 0; i < cells.length; i++) {
 		cells[i].removeEventListener('click', turnClick, false);
 	}
-	declareWinner(gameWon.player == huPlayer ? "Tu as gagné!" : "Tu as perdu.");
+	declareWinner(gameWon.player == huPlayer ? "Tu as gagné!" : "Tu as perdu.");// Condition ? Message_si_true : Message_si_false;
 }
 
 function declareWinner(who) {
@@ -123,7 +122,7 @@ function declareWinner(who) {
 }
 
 function emptySquares() {
-	return tableOrg.filter(s => typeof s == 'number');
+	return tableOrg.filter(s => typeof s == 'number'); //liste
 }
 
 function bestSpot() {
@@ -142,3 +141,7 @@ function checkTie() {
 	return false;
 }
 
+function myFunction() {
+	var element = document.body;
+	element.classList.toggle("dark-mode");
+  }
